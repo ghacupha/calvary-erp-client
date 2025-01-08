@@ -1,0 +1,20 @@
+{
+  "generator-jhipster": {
+    "baseName": "CalvaryErp",
+    "clientFramework": "angular",
+    "clientTestFrameworks": [],
+    "clientTheme": "journal",
+    "clientThemeVariant": "dark",
+    "creationTimestamp": 1736334647289,
+    "devServerPort": 4200,
+    "enableTranslation": false,
+    "entities": [],
+    "jhipsterVersion": "8.7.3",
+    "microfrontend": null,
+    "microfrontends": [],
+    "nativeLanguage": "en",
+    "skipServer": true,
+    "testFrameworks": [],
+    "withAdminUi": true
+  }
+}
