@@ -13,6 +13,7 @@
     "microfrontend": null,
     "microfrontends": [],
     "nativeLanguage": "en",
+    "serverPort": 8385,
     "skipServer": true,
     "testFrameworks": [],
     "withAdminUi": true
