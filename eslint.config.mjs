@@ -113,7 +113,7 @@ export default tseslint.config(
       'no-new-wrappers': 'error',
       'object-shorthand': ['error', 'always', { avoidExplicitReturnArrows: true }],
       radix: 'error',
-      'spaced-comment': ['warn', 'always'],
+      'spaced-comment': 'off',
     },
   },
   {

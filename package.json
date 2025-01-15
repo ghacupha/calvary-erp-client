@@ -3,7 +3,7 @@
   "version": "0.0.1-SNAPSHOT",
   "private": true,
   "description": "Description for Calvary Erp",
-  "license": "UNLICENSED",
+  "license": "GPL-3.0-only",
   "scripts": {
     "build": "npm run webapp:prod --",
     "build-watch": "concurrently 'npm run webapp:build:dev -- --watch'",
