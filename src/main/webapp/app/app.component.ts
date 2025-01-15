@@ -43,7 +43,8 @@ export default class AppComponent {
   private readonly dpConfig = inject(NgbDatepickerConfig);
 
   constructor() {
-    this.applicationConfigService.setEndpointPrefix(SERVER_API_URL);
+    // todo conditionally set endpoint with dev OR prod URL
+    this.applicationConfigService.setEndpointPrefix(CSERVER_API_URL);
     registerLocaleData(locale);
     this.iconLibrary.addIcons(...fontAwesomeIcons);
     this.dpConfig.minDate = { year: dayjs().subtract(100, 'year').year(), month: 1, day: 1 };

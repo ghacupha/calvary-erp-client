@@ -27,7 +27,7 @@ const routes: Routes = [
   {
     path: '',
     loadComponent: () => import('./home/home.component'),
-    title: 'home.title',
+    title: 'ERP| Home',
   },
   {
     path: '',
@@ -49,7 +49,7 @@ const routes: Routes = [
   {
     path: 'login',
     loadComponent: () => import('./login/login.component'),
-    title: 'login.title',
+    title: 'ERP| Login',
   },
   {
     path: '',

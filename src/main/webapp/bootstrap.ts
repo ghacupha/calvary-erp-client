@@ -30,5 +30,5 @@ if (!DEBUG_INFO_ENABLED) {
 
 bootstrapApplication(AppComponent, appConfig)
   // eslint-disable-next-line no-console
-  .then(() => console.log('Application started'))
+  .then(() => console.log('Calvary System is now live...'))
   .catch((err: unknown) => console.error(err));

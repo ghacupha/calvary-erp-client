@@ -16,4 +16,6 @@
 /// along with this program. If not, see <http://www.gnu.org/licenses/>.
 ///
 
-declare const SERVER_API_URL: string;
+declare const CSERVER_API_URL: string;
+declare const CSERVER_API_PROD_URL: string;
+declare const CSERVER_API_DEV_URL: string;

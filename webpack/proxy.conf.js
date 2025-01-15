@@ -17,10 +17,11 @@
  */
 function setupProxy({ tls }) {
   const serverResources = ['/api', '/services', '/management', '/v3/api-docs', '/h2-console', '/health'];
+  const port = process.env.SERVER_PORT || '8386'; // Default to 8386 for development
   return [
     {
       context: serverResources,
-      target: `http${tls ? 's' : ''}://localhost:8385`,
+      target: `http${tls ? 's' : ''}://localhost:${port}`,
       secure: false,
       changeOrigin: tls,
     },

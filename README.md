@@ -25,6 +25,20 @@ auto-refreshes when files change on your hard drive.
 ./npmw start
 ```
 
+This client can also connect to a docker-deployed backend on port 8385 with the command
+
+```
+ ./npmw run start:prod
+
+```
+
+But by default development work is meant to connect to the development server on port 8386 which is running on maven on the same host with the command
+
+```
+ ./npmw run start:dev
+
+```
+
 Npm is also used to manage CSS and JavaScript dependencies used in this application. You can upgrade dependencies by
 specifying a newer version in [package.json](package.json). You can also run `./npmw update` and `./npmw install` to manage dependencies.
 Add the `help` flag on any command to see how you can use it. For example, `./npmw help update`.
@@ -92,6 +106,14 @@ update src/main/webapp/app/app.config.ts
 
 ## Building for production
 
+On Windows OS to build production container run
+
+```
+
+  scripts\build-it
+
+```
+
 ## Testing
 
 ### Client tests
@@ -100,6 +122,14 @@ Unit tests are run by [Jest][]. They're located in [src/test/javascript/](src/te
 
 ```
 ./npmw test
+```
+
+You may also test against containerised backend Calvary API running on docker by starting with the command
+
+```
+
+  ./npmw run start:prod
+
 ```
 
 [JHipster Homepage and latest documentation]: https://www.jhipster.tech
