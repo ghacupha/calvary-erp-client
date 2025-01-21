@@ -30,7 +30,7 @@ set -eu
 # defaults for missing variables. Here, first use the regular command shell
 # to set the defaults:
 export SERVER_API_DOCKER_DEPLOY_HOST=${SERVER_API_DOCKER_DEPLOY_HOST:-http://localhost}
-export SERVER_API_DOCKER_DEPLOY_PORT=${SERVER_API_DOCKER_DEPLOY_PORT:-8387}
+export SERVER_API_DOCKER_DEPLOY_PORT=${SERVER_API_DOCKER_DEPLOY_PORT:-8385}
 export ERP_DOCUMENTS_MAX_FILE_SIZE=${ERP_DOCUMENTS_MAX_FILE_SIZE:-50M}
 # export NODE_OPTIONS=${NODE_OPTIONS:-"--max-old-space-size=8192"}
 

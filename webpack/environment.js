@@ -18,8 +18,7 @@
 module.exports = {
   I18N_HASH: 'generated_hash',
   CSERVER_API_URL: '',
-  CSERVER_API_DEV_URL: '',
-  CSERVER_API_PROD_URL: '',
+  CSERVER_API_URL_URL: '',
   __VERSION__: process.env.APP_VERSION || 'DEV',
   __DEBUG_INFO_ENABLED__: false,
 };

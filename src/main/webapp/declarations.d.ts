@@ -17,5 +17,4 @@
 ///
 
 declare const CSERVER_API_URL: string;
-declare const CSERVER_API_PROD_URL: string;
-declare const CSERVER_API_DEV_URL: string;
+declare const CSERVER_API_URL_URL: string;
