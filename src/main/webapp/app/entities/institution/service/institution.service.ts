@@ -17,7 +17,7 @@ export class InstitutionService {
   protected readonly http = inject(HttpClient);
   protected readonly applicationConfigService = inject(ApplicationConfigService);
 
-  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/institutions');
+  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/erp/institutions');
 
   create(institution: NewInstitution): Observable<EntityResponseType> {
     return this.http.post<IInstitution>(this.resourceUrl, institution, { observe: 'response' });

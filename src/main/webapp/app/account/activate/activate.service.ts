@@ -28,7 +28,7 @@ export class ActivateService {
   private readonly applicationConfigService = inject(ApplicationConfigService);
 
   get(key: string): Observable<{}> {
-    return this.http.get(this.applicationConfigService.getEndpointFor('api/activate'), {
+    return this.http.get(this.applicationConfigService.getEndpointFor('api/erp/activate'), {
       params: new HttpParams().set('key', key),
     });
   }

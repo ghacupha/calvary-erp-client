@@ -13,9 +13,11 @@
     "microfrontend": null,
     "microfrontends": [],
     "nativeLanguage": "en",
+    "searchEngine": "elasticsearch",
     "serverPort": 8385,
     "skipServer": true,
     "testFrameworks": [],
+    "websocket": "spring-websocket",
     "withAdminUi": true
   }
 }

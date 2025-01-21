@@ -29,7 +29,7 @@ export class ApplicationUserService {
   protected readonly http = inject(HttpClient);
   protected readonly applicationConfigService = inject(ApplicationConfigService);
 
-  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/application-users');
+  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/erp/application-users');
 
   create(applicationUser: NewApplicationUser): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(applicationUser);
