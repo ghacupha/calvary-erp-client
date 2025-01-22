@@ -1,3 +1,21 @@
+///
+/// Erp System - Mark I No 2 (Beniah Series) Client 0.0.1-SNAPSHOT
+/// Copyright © 2021 - 2025 Edwin Njeru (mailnjeru@gmail.com)
+///
+/// This program is free software: you can redistribute it and/or modify
+/// it under the terms of the GNU General Public License as published by
+/// the Free Software Foundation, either version 3 of the License, or
+/// (at your option) any later version.
+///
+/// This program is distributed in the hope that it will be useful,
+/// but WITHOUT ANY WARRANTY; without even the implied warranty of
+/// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+/// GNU General Public License for more details.
+///
+/// You should have received a copy of the GNU General Public License
+/// along with this program. If not, see <http://www.gnu.org/licenses/>.
+///
+
 import { Component, NgZone, OnInit, inject } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Data, ParamMap, Router, RouterModule } from '@angular/router';
@@ -35,11 +53,23 @@ import { ApplicationUserDeleteDialogComponent } from '../delete/application-user
   ],
 })
 export class ApplicationUserComponent implements OnInit {
+  private static readonly NOT_SORTABLE_FIELDS_AFTER_SEARCH = [
+    'username',
+    'firstName',
+    'lastName',
+    'email',
+    'langKey',
+    'imageUrl',
+    'activationKey',
+    'resetKey',
+  ];
+
   subscription: Subscription | null = null;
   applicationUsers?: IApplicationUser[];
   isLoading = false;
 
   sortState = sortStateSignal({});
+  currentSearch = '';
   filters: IFilterOptions = new FilterOptions();
 
   itemsPerPage = ITEMS_PER_PAGE;
@@ -66,6 +96,20 @@ export class ApplicationUserComponent implements OnInit {
     this.filters.filterChanges.subscribe(filterOptions => this.handleNavigation(1, this.sortState(), filterOptions));
   }
 
+  search(query: string): void {
+    const { predicate } = this.sortState();
+    if (query && predicate && ApplicationUserComponent.NOT_SORTABLE_FIELDS_AFTER_SEARCH.includes(predicate)) {
+      this.loadDefaultSortState();
+    }
+    this.page = 1;
+    this.currentSearch = query;
+    this.navigateToWithComponentValues(this.sortState());
+  }
+
+  loadDefaultSortState(): void {
+    this.sortState.set(this.sortService.parseSortParam(this.activatedRoute.snapshot.data[DEFAULT_SORT_DATA]));
+  }
+
   delete(applicationUser: IApplicationUser): void {
     const modalRef = this.modalService.open(ApplicationUserDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.applicationUser = applicationUser;
@@ -87,11 +131,11 @@ export class ApplicationUserComponent implements OnInit {
   }
 
   navigateToWithComponentValues(event: SortState): void {
-    this.handleNavigation(this.page, event, this.filters.filterOptions);
+    this.handleNavigation(this.page, event, this.filters.filterOptions, this.currentSearch);
   }
 
   navigateToPage(page: number): void {
-    this.handleNavigation(page, this.sortState(), this.filters.filterOptions);
+    this.handleNavigation(page, this.sortState(), this.filters.filterOptions, this.currentSearch);
   }
 
   protected fillComponentAttributeFromRoute(params: ParamMap, data: Data): void {
@@ -99,6 +143,13 @@ export class ApplicationUserComponent implements OnInit {
     this.page = +(page ?? 1);
     this.sortState.set(this.sortService.parseSortParam(params.get(SORT) ?? data[DEFAULT_SORT_DATA]));
     this.filters.initializeFromParams(params);
+    if (params.has('search') && params.get('search') !== '') {
+      this.currentSearch = params.get('search') as string;
+      const { predicate } = this.sortState();
+      if (predicate && ApplicationUserComponent.NOT_SORTABLE_FIELDS_AFTER_SEARCH.includes(predicate)) {
+        this.sortState.set({});
+      }
+    }
   }
 
   protected onResponseSuccess(response: EntityArrayResponseType): void {
@@ -116,7 +167,7 @@ export class ApplicationUserComponent implements OnInit {
   }
 
   protected queryBackend(): Observable<EntityArrayResponseType> {
-    const { page, filters } = this;
+    const { page, filters, currentSearch } = this;
 
     this.isLoading = true;
     const pageToLoad: number = page;
@@ -124,16 +175,21 @@ export class ApplicationUserComponent implements OnInit {
       page: pageToLoad - 1,
       size: this.itemsPerPage,
       eagerload: true,
+      query: currentSearch,
       sort: this.sortService.buildSortParam(this.sortState()),
     };
     filters.filterOptions.forEach(filterOption => {
       queryObject[filterOption.name] = filterOption.values;
     });
+    if (this.currentSearch && this.currentSearch !== '') {
+      return this.applicationUserService.search(queryObject).pipe(tap(() => (this.isLoading = false)));
+    }
     return this.applicationUserService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
   }
 
-  protected handleNavigation(page: number, sortState: SortState, filterOptions?: IFilterOption[]): void {
+  protected handleNavigation(page: number, sortState: SortState, filterOptions?: IFilterOption[], currentSearch?: string): void {
     const queryParamsObj: any = {
+      search: currentSearch,
       page,
       size: this.itemsPerPage,
       sort: this.sortService.buildSortParam(sortState),

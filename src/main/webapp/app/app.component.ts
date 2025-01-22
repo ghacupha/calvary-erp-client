@@ -27,6 +27,7 @@ import locale from '@angular/common/locales/en';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { fontAwesomeIcons } from './config/font-awesome-icons';
 import MainComponent from './layouts/main/main.component';
+import { TrackerService } from './core/tracker/tracker.service';
 
 @Component({
   standalone: true,
@@ -40,10 +41,11 @@ import MainComponent from './layouts/main/main.component';
 export default class AppComponent {
   private readonly applicationConfigService = inject(ApplicationConfigService);
   private readonly iconLibrary = inject(FaIconLibrary);
+  private readonly trackerService = inject(TrackerService);
   private readonly dpConfig = inject(NgbDatepickerConfig);
 
   constructor() {
-    // todo conditionally set endpoint with dev OR prod URL
+    this.trackerService.setup();
     this.applicationConfigService.setEndpointPrefix(CSERVER_API_URL);
     registerLocaleData(locale);
     this.iconLibrary.addIcons(...fontAwesomeIcons);

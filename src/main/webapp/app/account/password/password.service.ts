@@ -27,7 +27,7 @@ export class PasswordService {
   private readonly http = inject(HttpClient);
   private readonly applicationConfigService = inject(ApplicationConfigService);
 
-  private resourceUrl: string = this.applicationConfigService.getEndpointFor('api/erp/account/change-password');
+  private resourceUrl: string = this.applicationConfigService.getEndpointFor('api/account/change-password');
 
   save(newPassword: string, currentPassword: string): Observable<{}> {
     return this.http.post(this.resourceUrl, { currentPassword, newPassword });

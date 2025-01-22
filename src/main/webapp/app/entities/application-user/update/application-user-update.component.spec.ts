@@ -1,3 +1,21 @@
+///
+/// Erp System - Mark I No 2 (Beniah Series) Client 0.0.1-SNAPSHOT
+/// Copyright © 2021 - 2025 Edwin Njeru (mailnjeru@gmail.com)
+///
+/// This program is free software: you can redistribute it and/or modify
+/// it under the terms of the GNU General Public License as published by
+/// the Free Software Foundation, either version 3 of the License, or
+/// (at your option) any later version.
+///
+/// This program is distributed in the hope that it will be useful,
+/// but WITHOUT ANY WARRANTY; without even the implied warranty of
+/// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+/// GNU General Public License for more details.
+///
+/// You should have received a copy of the GNU General Public License
+/// along with this program. If not, see <http://www.gnu.org/licenses/>.
+///
+
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpResponse, provideHttpClient } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
@@ -53,10 +71,10 @@ describe('ApplicationUser Management Update Component', () => {
   describe('ngOnInit', () => {
     it('Should call User query and add missing value', () => {
       const applicationUser: IApplicationUser = { id: 456 };
-      const systemUser: IUser = { id: 9076 };
+      const systemUser: IUser = { id: 1313 };
       applicationUser.systemUser = systemUser;
 
-      const userCollection: IUser[] = [{ id: 15701 }];
+      const userCollection: IUser[] = [{ id: 873 }];
       jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
       const additionalUsers = [systemUser];
       const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
@@ -75,10 +93,10 @@ describe('ApplicationUser Management Update Component', () => {
 
     it('Should call Institution query and add missing value', () => {
       const applicationUser: IApplicationUser = { id: 456 };
-      const institution: IInstitution = { id: 9357 };
+      const institution: IInstitution = { id: 26072 };
       applicationUser.institution = institution;
 
-      const institutionCollection: IInstitution[] = [{ id: 31040 }];
+      const institutionCollection: IInstitution[] = [{ id: 8186 }];
       jest.spyOn(institutionService, 'query').mockReturnValue(of(new HttpResponse({ body: institutionCollection })));
       const additionalInstitutions = [institution];
       const expectedCollection: IInstitution[] = [...additionalInstitutions, ...institutionCollection];
@@ -97,9 +115,9 @@ describe('ApplicationUser Management Update Component', () => {
 
     it('Should update editForm', () => {
       const applicationUser: IApplicationUser = { id: 456 };
-      const systemUser: IUser = { id: 2666 };
+      const systemUser: IUser = { id: 23715 };
       applicationUser.systemUser = systemUser;
-      const institution: IInstitution = { id: 767 };
+      const institution: IInstitution = { id: 2082 };
       applicationUser.institution = institution;
 
       activatedRoute.data = of({ applicationUser });

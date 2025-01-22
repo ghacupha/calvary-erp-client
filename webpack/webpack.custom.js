@@ -131,6 +131,8 @@ module.exports = async (config, options, targetOptions) => {
       // If you use an API server, in `prod` mode, you will need to enable CORS
       // (see the `jhipster.cors` common JHipster property in the `application-*.yml` configurations)
       CSERVER_API_URL: JSON.stringify(environment.CSERVER_API_URL),
+      CSERVER_API_WS_URL_HOST: JSON.stringify(environment.CSERVER_API_WS_URL_HOST),
+      CSERVER_API_WS_URL: JSON.stringify(environment.CSERVER_API_WS_URL),
       CSERVER_API_URL_URL: JSON.stringify(environment.CSERVER_API_URL_URL),
     }),
   );

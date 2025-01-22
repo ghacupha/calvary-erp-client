@@ -25,6 +25,12 @@ function setupProxy({ tls }) {
       secure: false,
       changeOrigin: tls,
     },
+    {
+      context: ['/websocket'],
+      target: `ws://10.60.27.22:${port}`,
+      // target: process.env.CSERVER_API_WS_URL_HOST,
+      ws: true,
+    },
   ];
 }
 

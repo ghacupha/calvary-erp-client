@@ -16,9 +16,12 @@
 /// along with this program. If not, see <http://www.gnu.org/licenses/>.
 ///
 
-export interface IInstitution {
-  id: number;
-  name?: string | null;
+export class TrackerActivity {
+  constructor(
+    public sessionId: string,
+    public userLogin: string,
+    public ipAddress: string,
+    public page: string,
+    public time: string,
+  ) {}
 }
-
-export type NewInstitution = Omit<IInstitution, 'id'> & { id: null };

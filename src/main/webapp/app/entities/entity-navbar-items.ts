@@ -18,4 +18,17 @@
 
 import NavbarItem from 'app/layouts/navbar/navbar-item.model';
 
-export const EntityNavbarItems: NavbarItem[] = [];
+export const EntityNavbarItems: NavbarItem[] = [
+  {
+    name: 'ApplicationUser',
+    route: '/application-user',
+  },
+  {
+    name: 'EntitySubscription',
+    route: '/entity-subscription',
+  },
+  {
+    name: 'Institution',
+    route: '/institution',
+  },
+];

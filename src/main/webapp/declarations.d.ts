@@ -17,4 +17,7 @@
 ///
 
 declare const CSERVER_API_URL: string;
+declare const SERVER_PORT: string;
+declare const CSERVER_API_WS_URL: string;
+declare const CSERVER_API_WS_URL_HOST: string;
 declare const CSERVER_API_URL_URL: string;
