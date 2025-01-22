@@ -40,6 +40,7 @@ export class InstitutionService {
 
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/erp/institutions');
   protected resourceSearchUrl = this.applicationConfigService.getEndpointFor('api/erp/institutions/_search');
+  protected resourceRegisteredUrl = this.applicationConfigService.getEndpointFor('api/erp/institutions/registered');
 
   create(institution: NewInstitution): Observable<EntityResponseType> {
     return this.http.post<IInstitution>(this.resourceUrl, institution, { observe: 'response' });
@@ -103,5 +104,10 @@ export class InstitutionService {
       return [...institutionsToAdd, ...institutionCollection];
     }
     return institutionCollection;
+  }
+
+  queryRegistered(req?: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http.get<IInstitution[]>(this.resourceRegisteredUrl, { params: options, observe: 'response' });
   }
 }

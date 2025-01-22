@@ -56,6 +56,7 @@
     "@stomp/rx-stomp": "2.0.0",
     "bootstrap": "5.3.3",
     "bootswatch": "5.3.3",
+    "calvary-erp": "file:",
     "dayjs": "1.11.13",
     "ngx-infinite-scroll": "18.0.0",
     "rxjs": "7.8.1",
