@@ -102,9 +102,9 @@ export default class RegisterComponent implements AfterViewInit, OnInit {
     if (password !== confirmPassword) {
       this.doNotMatch.set(true);
     } else {
-      const { login, email } = this.registerForm.getRawValue();
+      const { login, email, institutionId, firstName, lastName } = this.registerForm.getRawValue();
       this.registerService
-        .save({ login, email, password, langKey: 'en' })
+        .save({ login, email, password, langKey: 'en', institutionId, firstName, lastName })
         .subscribe({ next: () => this.success.set(true), error: response => this.processError(response) });
     }
   }
