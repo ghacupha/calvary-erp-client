@@ -51,8 +51,8 @@ export class EntitySubscriptionService {
   protected readonly http = inject(HttpClient);
   protected readonly applicationConfigService = inject(ApplicationConfigService);
 
-  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/erp/entity-subscriptions');
-  protected resourceSearchUrl = this.applicationConfigService.getEndpointFor('api/erp/entity-subscriptions/_search');
+  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/entity-subscriptions');
+  protected resourceSearchUrl = this.applicationConfigService.getEndpointFor('api/entity-subscriptions/_search');
 
   create(entitySubscription: NewEntitySubscription): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(entitySubscription);

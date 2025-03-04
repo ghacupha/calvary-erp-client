@@ -50,8 +50,8 @@ export class ApplicationUserService {
   protected readonly http = inject(HttpClient);
   protected readonly applicationConfigService = inject(ApplicationConfigService);
 
-  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/erp/application-users');
-  protected resourceSearchUrl = this.applicationConfigService.getEndpointFor('api/erp/application-users/_search');
+  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/application-users');
+  protected resourceSearchUrl = this.applicationConfigService.getEndpointFor('api/application-users/_search');
 
   create(applicationUser: NewApplicationUser): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(applicationUser);

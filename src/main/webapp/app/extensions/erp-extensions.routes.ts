@@ -17,48 +17,20 @@
 ///
 
 import { Routes } from '@angular/router';
-
-import { Authority } from 'app/config/authority.constants';
-
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-import { errorRoute } from './layouts/error/error.route';
-import { erpExtensionRoutes } from './extensions/erp-extensions.routes';
 
-const routes: Routes = [
-  {
-    path: '',
-    loadComponent: () => import('./home/home.component'),
-    title: 'ERP| Home',
-  },
-  {
-    path: '',
-    loadComponent: () => import('./layouts/navbar/navbar.component'),
-    outlet: 'navbar',
-  },
-  {
-    path: 'admin',
-    data: {
-      authorities: [Authority.ADMIN],
-    },
-    canActivate: [UserRouteAccessService],
-    loadChildren: () => import('./admin/admin.routes'),
-  },
+/**
+ * These routes lead to similar entities as the ones in the entities folder
+ * though these consist mostly of extensions and custom code
+ */
+export const erpExtensionRoutes: Routes = [
   {
     path: 'account',
-    loadChildren: () => import('./account/account.route'),
+    data: {
+      pageTitle: 'Registry',
+      authorities: ['ROLE_ADMIN'],
+    },
+    canActivate: [UserRouteAccessService],
+    loadChildren: () => import('./registration/erp-registration.routes'),
   },
-  {
-    path: 'login',
-    loadComponent: () => import('./login/login.component'),
-    title: 'ERP| Login',
-  },
-  {
-    path: '',
-    data: { authorities: ['ROLE_DEV', 'ROLE_ADMIN'] },
-    loadChildren: () => import(`./entities/entity.routes`),
-  },
-  ...erpExtensionRoutes,
-  ...errorRoute,
 ];
-
-export default routes;
