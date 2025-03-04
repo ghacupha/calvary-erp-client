@@ -18,24 +18,17 @@
 
 -->
 @if (applicationUser) {
-  <form name="deleteForm" (ngSubmit)="confirmDelete(applicationUser.id!)">
-    <div class="modal-header">
-      <h4 class="modal-title" data-cy="applicationUserDeleteDialogHeading">Confirm delete operation</h4>
-    </div>
+  <div class="customer-wrapper">
+    <header>
+      <h2>Application User Deletion</h2>
+    </header>
 
-    <div class="modal-body">
-      <jhi-alert-error></jhi-alert-error>
-      <p id="jhi-delete-applicationUser-heading">Are you sure you want to delete Application User {{ applicationUser.id }}?</p>
-    </div>
+    <!-- Include the generated component here -->
+    <jhi-application-user-delete></jhi-application-user-delete>
 
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
-        <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
-      </button>
-
-      <button id="jhi-confirm-delete-applicationUser" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
-        <fa-icon icon="times"></fa-icon>&nbsp;<span>Delete</span>
-      </button>
-    </div>
-  </form>
+    <footer>
+      <!-- Additional custom footer content -->
+      Custom footer content
+    </footer>
+  </div>
 }

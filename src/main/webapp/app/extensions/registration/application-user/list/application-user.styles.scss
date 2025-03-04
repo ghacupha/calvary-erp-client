@@ -1,0 +1,39 @@
+.hide-child-header {
+  ::ng-deep {
+    #page-heading {
+      display: none;
+    }
+  }
+}
+
+.hide-reset-column {
+  ::ng-deep {
+    // Hide the header cell with the specified attribute.
+    thead th[jhiSortBy='resetKey'] {
+      display: none;
+    }
+    thead th[jhiSortBy='activationKey'] {
+      display: none;
+    }
+    thead th[jhiSortBy='imageUrl'] {
+      display: none;
+    }
+    thead th[jhiSortBy='resetDate'] {
+      display: none;
+    }
+
+    // Hide the corresponding data cells in each row.
+    tbody tr td:nth-child(10) {
+      display: none;
+    }
+    tbody tr td:nth-child(9) {
+      display: none;
+    }
+    tbody tr td:nth-child(8) {
+      display: none;
+    }
+    tbody tr td:nth-child(11) {
+      display: none;
+    }
+  }
+}

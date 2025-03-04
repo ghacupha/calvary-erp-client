@@ -23,6 +23,11 @@ import { ERPApplicationUserService } from './registration/application-user/servi
 import { ERPEntitySubscriptionService } from './registration/entity-subscription/service/entity-subscription.service';
 import { ERPInstitutionService } from './registration/institution/service/institution.service';
 import { InstitutionService } from 'app/entities/institution/service/institution.service';
+import { ApplicationUserDeleteDialogComponent } from '../entities/application-user/delete/application-user-delete-dialog.component';
+import { ApplicationUserComponent } from '../entities/application-user/list/application-user.component';
+import { ERPApplicationUserDeleteDialogComponent } from './registration/application-user/delete/application-user-delete-dialog.component';
+import { ERPApplicationUserComponent } from './registration/application-user/list/application-user.component';
+
 import { Provider } from '@angular/core';
 
 /**
@@ -32,6 +37,8 @@ import { Provider } from '@angular/core';
 export const erpExtensionProviders: Provider[] = [
   // Import the tokens/services you need to override
   { provide: ApplicationUserService, useClass: ERPApplicationUserService },
+  { provide: ApplicationUserDeleteDialogComponent, useClass: ERPApplicationUserDeleteDialogComponent },
+  { provide: ApplicationUserComponent, useClass: ERPApplicationUserComponent },
   { provide: EntitySubscriptionService, useClass: ERPEntitySubscriptionService },
   { provide: InstitutionService, useClass: ERPInstitutionService },
 ];

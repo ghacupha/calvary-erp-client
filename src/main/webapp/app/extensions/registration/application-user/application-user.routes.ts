@@ -25,7 +25,7 @@ import ApplicationUserResolve from './route/application-user-routing-resolve.ser
 const applicationUserRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/application-user.component').then(m => m.ApplicationUserComponent),
+    loadComponent: () => import('./list/application-user.component').then(m => m.ERPApplicationUserComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
