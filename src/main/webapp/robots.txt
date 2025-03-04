@@ -1,6 +1,6 @@
 ====
     Erp System - Mark I No 2 (Beniah Series) Client 0.0.1-SNAPSHOT
-    Copyright © 2021 - 2025 Edwin Njeru (mailnjeru@gmail.com)
+    Copyright © 2022 - 2025 Edwin Njeru (mailnjeru@gmail.com)
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

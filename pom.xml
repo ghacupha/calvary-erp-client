@@ -31,7 +31,7 @@
         <docker.image.prefix>ghacupha</docker.image.prefix>
         <founder.website>https://github.com/ghacupha</founder.website>
         <owner.email>mailnjeru@gmail.com</owner.email>
-        <project.inceptionYear>2021 - 2025</project.inceptionYear>
+        <project.inceptionYear>2022 - 2025</project.inceptionYear>
         <project.owner>Edwin Njeru</project.owner>
 
     </properties>
@@ -52,6 +52,7 @@
                 <version>4.0.rc2</version>
                 <configuration>
                     <excludes>
+                        <exclude>.husky/**</exclude>
                         <exclude>.idea/**</exclude>
                         <exclude>.jhipster/**</exclude>
                         <exclude>node/**</exclude>

@@ -1,6 +1,6 @@
 @REM
 @REM Erp System - Mark I No 2 (Beniah Series) Client 0.0.1-SNAPSHOT
-@REM Copyright © 2021 - 2025 Edwin Njeru (mailnjeru@gmail.com)
+@REM Copyright © 2022 - 2025 Edwin Njeru (mailnjeru@gmail.com)
 @REM
 @REM This program is free software: you can redistribute it and/or modify
 @REM it under the terms of the GNU General Public License as published by
