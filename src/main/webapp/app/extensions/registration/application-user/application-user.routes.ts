@@ -41,7 +41,7 @@ const applicationUserRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/application-user-update.component').then(m => m.ApplicationUserUpdateComponent),
+    loadComponent: () => import('./update/application-user-update.component').then(m => m.ERPApplicationUserUpdateComponent),
     resolve: {
       applicationUser: ApplicationUserResolve,
     },
@@ -49,7 +49,7 @@ const applicationUserRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/application-user-update.component').then(m => m.ApplicationUserUpdateComponent),
+    loadComponent: () => import('./update/application-user-update.component').then(m => m.ERPApplicationUserUpdateComponent),
     resolve: {
       applicationUser: ApplicationUserResolve,
     },

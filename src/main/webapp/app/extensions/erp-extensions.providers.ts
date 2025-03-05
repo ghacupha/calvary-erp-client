@@ -19,16 +19,18 @@
 // erp-extensions.module.ts
 import { ApplicationUserService } from 'app/entities/application-user/service/application-user.service';
 import { EntitySubscriptionService } from 'app/entities/entity-subscription/service/entity-subscription.service';
-import { ERPApplicationUserService } from './registration/application-user/service/application-user.service';
-import { ERPEntitySubscriptionService } from './registration/entity-subscription/service/entity-subscription.service';
-import { ERPInstitutionService } from './registration/institution/service/institution.service';
 import { InstitutionService } from 'app/entities/institution/service/institution.service';
 import { ApplicationUserDeleteDialogComponent } from '../entities/application-user/delete/application-user-delete-dialog.component';
 import { ApplicationUserComponent } from '../entities/application-user/list/application-user.component';
 import { ERPApplicationUserDeleteDialogComponent } from './registration/application-user/delete/application-user-delete-dialog.component';
 import { ERPApplicationUserComponent } from './registration/application-user/list/application-user.component';
+import { ERPApplicationUserService } from './registration/application-user/service/application-user.service';
+import { ERPEntitySubscriptionService } from './registration/entity-subscription/service/entity-subscription.service';
+import { ERPInstitutionService } from './registration/institution/service/institution.service';
 
 import { Provider } from '@angular/core';
+import { ApplicationUserUpdateComponent } from 'app/entities/application-user/update/application-user-update.component';
+import { ERPApplicationUserUpdateComponent } from './registration/application-user/update/application-user-update.component';
 
 /**
  * Extensions for components that have been extended in the extensions
@@ -39,6 +41,7 @@ export const erpExtensionProviders: Provider[] = [
   { provide: ApplicationUserService, useClass: ERPApplicationUserService },
   { provide: ApplicationUserDeleteDialogComponent, useClass: ERPApplicationUserDeleteDialogComponent },
   { provide: ApplicationUserComponent, useClass: ERPApplicationUserComponent },
+  { provide: ApplicationUserUpdateComponent, useClass: ERPApplicationUserUpdateComponent },
   { provide: EntitySubscriptionService, useClass: ERPEntitySubscriptionService },
   { provide: InstitutionService, useClass: ERPInstitutionService },
 ];
