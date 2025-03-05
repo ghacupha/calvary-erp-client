@@ -11,7 +11,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   selector: 'jhi-slide-toggle',
   template: `
     <div class="slide-toggle">
-      <!-- Replace this with your library’s markup if needed -->
+      <!-- Replace this with library’s markup-->
       <input type="checkbox" [checked]="value" (change)="onToggle($event)" id="slideToggle" />
       <label for="slideToggle">
         <span class="slider"></span>
@@ -20,7 +20,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   `,
   styles: [
     `
-      /* Simple styling; you can replace it with your library’s styling */
+      /* Sample placeholder style to replace with library’s styling */
       .slide-toggle {
         position: relative;
         display: inline-block;
@@ -73,8 +73,11 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class SlideToggleComponent implements ControlValueAccessor {
   value = false;
 
-  onChange: (value: boolean) => void = () => {
-    // code to run on change
+  // Default onChange callback.
+  onChange: (value: boolean) => void = (value: boolean) => {
+    // Default logic or simply a placeholder.
+    // eslint-disable-next-line no-console
+    console.log('Default onChange:', value);
   };
   onTouched: () => void = () => {
     // code to run on touch
@@ -83,9 +86,22 @@ export class SlideToggleComponent implements ControlValueAccessor {
   writeValue(val: any): void {
     this.value = !!val;
   }
+
   registerOnChange(fn: any): void {
-    this.onChange = fn;
+    // Wrap the provided fn so that we can add our custom logic.
+    this.onChange = (value: boolean) => {
+      // Custom logic: for example, logging or value transformation.
+      // eslint-disable-next-line no-console
+      console.log('SlideToggle changed, new value:', value);
+
+      // You can add more logic here if needed, for example:
+      // if (value) { ... }
+
+      // Then, propagate the change to the parent.
+      fn(value);
+    };
   }
+
   registerOnTouched(fn: any): void {
     this.onTouched = fn;
   }
@@ -93,9 +109,12 @@ export class SlideToggleComponent implements ControlValueAccessor {
     // Optionally handle disable state
   }
 
+  // This event handler is triggered when the input value changes.
   onToggle(event: Event): void {
     const input = event.target as HTMLInputElement;
     this.value = input.checked;
+    // Propagate the new value and mark the control as touched.
     this.onChange(this.value);
+    this.onTouched();
   }
 }

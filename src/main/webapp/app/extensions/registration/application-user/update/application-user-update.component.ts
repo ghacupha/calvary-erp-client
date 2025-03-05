@@ -22,11 +22,12 @@ import SharedModule from 'app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ApplicationUserUpdateComponent } from 'app/entities/application-user/update/application-user-update.component';
+import { SlideToggleComponent } from 'app/extensions/shared/slide-toggle.component';
 
 @Component({
   standalone: true,
   selector: 'jhi-erp-application-user-update',
   templateUrl: './application-user-update.component.html',
-  imports: [SharedModule, FormsModule, ReactiveFormsModule, ApplicationUserUpdateComponent],
+  imports: [SharedModule, FormsModule, ReactiveFormsModule, ApplicationUserUpdateComponent, SlideToggleComponent],
 })
 export class ERPApplicationUserUpdateComponent extends ApplicationUserUpdateComponent implements OnInit {}
