@@ -63,6 +63,7 @@ if (DEBUG_INFO_ENABLED) {
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    ...erpExtensionProviders,
     provideRouter(routes, ...routerFeatures),
     importProvidersFrom(BrowserModule),
     // Set this to true to enable service worker (PWA)
@@ -73,7 +74,6 @@ export const appConfig: ApplicationConfig = {
     { provide: NgbDateAdapter, useClass: NgbDateDayjsAdapter },
     httpInterceptorProviders,
     { provide: TitleStrategy, useClass: AppPageTitleStrategy },
-    ...erpExtensionProviders,
     // jhipster-needle-angular-add-module JHipster will add new module here
   ],
 };

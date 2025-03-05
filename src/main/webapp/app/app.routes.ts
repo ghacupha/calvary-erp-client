@@ -52,12 +52,12 @@ const routes: Routes = [
     loadComponent: () => import('./login/login.component'),
     title: 'ERP| Login',
   },
+  ...erpExtensionRoutes,
   {
     path: '',
     data: { authorities: ['ROLE_DEV', 'ROLE_ADMIN'] },
     loadChildren: () => import(`./entities/entity.routes`),
   },
-  ...erpExtensionRoutes,
   ...errorRoute,
 ];
 

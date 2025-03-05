@@ -31,12 +31,28 @@ import { ERPInstitutionService } from './registration/institution/service/instit
 import { Provider } from '@angular/core';
 import { ApplicationUserUpdateComponent } from 'app/entities/application-user/update/application-user-update.component';
 import { ERPApplicationUserUpdateComponent } from './registration/application-user/update/application-user-update.component';
+import { Routes, ROUTES } from '@angular/router';
+import applicationUserOverrideRoutes from './registration/application-user/application-user-override.routes';
+
+/**
+ * This configuration is to override generated component routes
+ */
+const extensionRoutes: Routes = [
+  // Custom component routes to override generated routes
+  ...applicationUserOverrideRoutes,
+];
 
 /**
  * Extensions for components that have been extended in the extensions
  * folder
  */
 export const erpExtensionProviders: Provider[] = [
+  // Route overrides
+  {
+    provide: ROUTES,
+    useValue: extensionRoutes,
+    multi: true,
+  },
   // Import the tokens/services you need to override
   { provide: ApplicationUserService, useClass: ERPApplicationUserService },
   { provide: ApplicationUserDeleteDialogComponent, useClass: ERPApplicationUserDeleteDialogComponent },
