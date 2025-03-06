@@ -26,7 +26,6 @@ import { IInstitution } from '../institution.model';
 import { InstitutionService } from '../service/institution.service';
 
 @Component({
-  standalone: true,
   templateUrl: './institution-delete-dialog.component.html',
   imports: [SharedModule, FormsModule],
 })

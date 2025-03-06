@@ -21,30 +21,30 @@ import dayjs from 'dayjs/esm';
 import { IEntitySubscription, NewEntitySubscription } from './entity-subscription.model';
 
 export const sampleWithRequiredData: IEntitySubscription = {
-  id: 4500,
-  subscriptionToken: 'ffc0f710-9e92-4e25-9154-8ab17fc6a605',
-  startDate: dayjs('2024-09-30T21:32'),
-  endDate: dayjs('2024-09-30T14:00'),
+  id: 3481,
+  subscriptionToken: '2587f784-676a-4542-a856-209674fd2c56',
+  startDate: dayjs('2024-10-01T05:17'),
+  endDate: dayjs('2024-09-30T22:16'),
 };
 
 export const sampleWithPartialData: IEntitySubscription = {
-  id: 5984,
-  subscriptionToken: '5ba0712e-01a5-46df-8846-838c00665573',
-  startDate: dayjs('2024-10-01T03:07'),
-  endDate: dayjs('2024-09-30T14:12'),
+  id: 389,
+  subscriptionToken: '08f18c20-117a-4147-9daf-46cd29836623',
+  startDate: dayjs('2024-10-01T04:05'),
+  endDate: dayjs('2024-10-01T07:05'),
 };
 
 export const sampleWithFullData: IEntitySubscription = {
-  id: 18989,
-  subscriptionToken: '6c161407-0400-469c-9425-110d0f7b3a6e',
-  startDate: dayjs('2024-09-30T16:42'),
-  endDate: dayjs('2024-10-01T09:41'),
+  id: 25112,
+  subscriptionToken: 'c018bce4-fa34-4da3-9044-45f5c714a5ef',
+  startDate: dayjs('2024-10-01T02:49'),
+  endDate: dayjs('2024-10-01T08:15'),
 };
 
 export const sampleWithNewData: NewEntitySubscription = {
-  subscriptionToken: '1a58072c-81bf-46ba-b56e-13b9a288aae4',
-  startDate: dayjs('2024-09-30T22:09'),
-  endDate: dayjs('2024-10-01T08:18'),
+  subscriptionToken: 'c0c5f182-d97e-40a2-8e33-ee1dcf85b059',
+  startDate: dayjs('2024-10-01T04:03'),
+  endDate: dayjs('2024-09-30T23:14'),
   id: null,
 };
 

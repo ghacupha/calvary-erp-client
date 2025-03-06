@@ -21,37 +21,33 @@ import dayjs from 'dayjs/esm';
 import { IApplicationUser, NewApplicationUser } from './application-user.model';
 
 export const sampleWithRequiredData: IApplicationUser = {
-  id: 19017,
-  username: 'fooey little offend',
+  id: 15785,
+  username: 'whoever starch',
 };
 
 export const sampleWithPartialData: IApplicationUser = {
-  id: 25246,
-  username: 'till',
-  firstName: 'Doug',
-  lastName: 'Sawayn',
-  email: 'Erick.Weber-Auer@yahoo.com',
-  langKey: 'once inject',
-  resetKey: 'opposite ugh admonish',
-  resetDate: dayjs('2024-09-30T09:53'),
+  id: 23970,
+  username: 'ew',
+  email: 'Noah.Bashirian@gmail.com',
+  langKey: 'wedding',
 };
 
 export const sampleWithFullData: IApplicationUser = {
-  id: 7417,
-  username: 'devise cautiously',
-  firstName: 'Billie',
-  lastName: 'Dibbert',
-  email: 'Cornell_Predovic95@hotmail.com',
+  id: 9548,
+  username: 'syringe but',
+  firstName: 'Stephan',
+  lastName: 'Goyette',
+  email: 'Earline_Ferry@yahoo.com',
   activated: true,
-  langKey: 'helpfully daily',
-  imageUrl: 'grass however outside',
-  activationKey: 'ugh elastic',
-  resetKey: 'irritably',
-  resetDate: dayjs('2024-09-30T11:13'),
+  langKey: 'afore respectful forswear',
+  imageUrl: 'before painfully fond',
+  activationKey: 'hovel',
+  resetKey: 'blond boohoo',
+  resetDate: dayjs('2024-09-30T06:00'),
 };
 
 export const sampleWithNewData: NewApplicationUser = {
-  username: 'neglect lively',
+  username: 'deliquesce left dwell',
   id: null,
 };
 

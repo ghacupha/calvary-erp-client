@@ -79,7 +79,7 @@ describe('ApplicationUser Management Component', () => {
       .mockReturnValueOnce(
         of(
           new HttpResponse({
-            body: [{ id: 123 }],
+            body: [{ id: 2107 }],
             headers: new HttpHeaders({
               link: '<http://localhost/api/foo?page=1&size=20>; rel="next"',
             }),
@@ -89,7 +89,7 @@ describe('ApplicationUser Management Component', () => {
       .mockReturnValueOnce(
         of(
           new HttpResponse({
-            body: [{ id: 456 }],
+            body: [{ id: 4268 }],
             headers: new HttpHeaders({
               link: '<http://localhost/api/foo?page=0&size=20>; rel="prev",<http://localhost/api/foo?page=2&size=20>; rel="next"',
             }),
@@ -104,12 +104,12 @@ describe('ApplicationUser Management Component', () => {
 
     // THEN
     expect(service.query).toHaveBeenCalled();
-    expect(comp.applicationUsers?.[0]).toEqual(expect.objectContaining({ id: 123 }));
+    expect(comp.applicationUsers()[0]).toEqual(expect.objectContaining({ id: 2107 }));
   });
 
   describe('trackId', () => {
     it('Should forward to applicationUserService', () => {
-      const entity = { id: 123 };
+      const entity = { id: 2107 };
       jest.spyOn(service, 'getApplicationUserIdentifier');
       const id = comp.trackId(entity);
       expect(service.getApplicationUserIdentifier).toHaveBeenCalledWith(entity);

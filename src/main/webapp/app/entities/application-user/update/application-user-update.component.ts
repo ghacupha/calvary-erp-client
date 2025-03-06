@@ -16,7 +16,7 @@
 /// along with this program. If not, see <http://www.gnu.org/licenses/>.
 ///
 
-import { Component, Input, OnInit, TemplateRef, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -34,14 +34,11 @@ import { IApplicationUser } from '../application-user.model';
 import { ApplicationUserFormGroup, ApplicationUserFormService } from './application-user-form.service';
 
 @Component({
-  standalone: true,
   selector: 'jhi-application-user-update',
   templateUrl: './application-user-update.component.html',
   imports: [SharedModule, FormsModule, ReactiveFormsModule],
 })
 export class ApplicationUserUpdateComponent implements OnInit {
-  @Input() customActivatedTemplate?: TemplateRef<any> | null = null;
-
   isSaving = false;
   applicationUser: IApplicationUser | null = null;
 

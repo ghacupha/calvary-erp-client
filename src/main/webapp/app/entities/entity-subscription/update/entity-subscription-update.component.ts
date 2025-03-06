@@ -32,7 +32,6 @@ import { EntitySubscriptionService } from '../service/entity-subscription.servic
 import { EntitySubscriptionFormGroup, EntitySubscriptionFormService } from './entity-subscription-form.service';
 
 @Component({
-  standalone: true,
   selector: 'jhi-entity-subscription-update',
   templateUrl: './entity-subscription-update.component.html',
   imports: [SharedModule, FormsModule, ReactiveFormsModule],

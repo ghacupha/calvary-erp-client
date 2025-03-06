@@ -70,11 +70,11 @@ describe('ApplicationUser Management Update Component', () => {
 
   describe('ngOnInit', () => {
     it('Should call User query and add missing value', () => {
-      const applicationUser: IApplicationUser = { id: 456 };
-      const systemUser: IUser = { id: 1313 };
+      const applicationUser: IApplicationUser = { id: 4268 };
+      const systemUser: IUser = { id: 3944 };
       applicationUser.systemUser = systemUser;
 
-      const userCollection: IUser[] = [{ id: 873 }];
+      const userCollection: IUser[] = [{ id: 3944 }];
       jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
       const additionalUsers = [systemUser];
       const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
@@ -92,11 +92,11 @@ describe('ApplicationUser Management Update Component', () => {
     });
 
     it('Should call Institution query and add missing value', () => {
-      const applicationUser: IApplicationUser = { id: 456 };
-      const institution: IInstitution = { id: 26072 };
+      const applicationUser: IApplicationUser = { id: 4268 };
+      const institution: IInstitution = { id: 20763 };
       applicationUser.institution = institution;
 
-      const institutionCollection: IInstitution[] = [{ id: 8186 }];
+      const institutionCollection: IInstitution[] = [{ id: 20763 }];
       jest.spyOn(institutionService, 'query').mockReturnValue(of(new HttpResponse({ body: institutionCollection })));
       const additionalInstitutions = [institution];
       const expectedCollection: IInstitution[] = [...additionalInstitutions, ...institutionCollection];
@@ -114,17 +114,17 @@ describe('ApplicationUser Management Update Component', () => {
     });
 
     it('Should update editForm', () => {
-      const applicationUser: IApplicationUser = { id: 456 };
-      const systemUser: IUser = { id: 23715 };
+      const applicationUser: IApplicationUser = { id: 4268 };
+      const systemUser: IUser = { id: 3944 };
       applicationUser.systemUser = systemUser;
-      const institution: IInstitution = { id: 2082 };
+      const institution: IInstitution = { id: 20763 };
       applicationUser.institution = institution;
 
       activatedRoute.data = of({ applicationUser });
       comp.ngOnInit();
 
-      expect(comp.usersSharedCollection).toContain(systemUser);
-      expect(comp.institutionsSharedCollection).toContain(institution);
+      expect(comp.usersSharedCollection).toContainEqual(systemUser);
+      expect(comp.institutionsSharedCollection).toContainEqual(institution);
       expect(comp.applicationUser).toEqual(applicationUser);
     });
   });
@@ -133,7 +133,7 @@ describe('ApplicationUser Management Update Component', () => {
     it('Should call update service on save for existing entity', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IApplicationUser>>();
-      const applicationUser = { id: 123 };
+      const applicationUser = { id: 2107 };
       jest.spyOn(applicationUserFormService, 'getApplicationUser').mockReturnValue(applicationUser);
       jest.spyOn(applicationUserService, 'update').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
@@ -156,7 +156,7 @@ describe('ApplicationUser Management Update Component', () => {
     it('Should call create service on save for new entity', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IApplicationUser>>();
-      const applicationUser = { id: 123 };
+      const applicationUser = { id: 2107 };
       jest.spyOn(applicationUserFormService, 'getApplicationUser').mockReturnValue({ id: null });
       jest.spyOn(applicationUserService, 'create').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
@@ -179,7 +179,7 @@ describe('ApplicationUser Management Update Component', () => {
     it('Should set isSaving to false on error', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IApplicationUser>>();
-      const applicationUser = { id: 123 };
+      const applicationUser = { id: 2107 };
       jest.spyOn(applicationUserService, 'update').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
       activatedRoute.data = of({ applicationUser });
@@ -200,8 +200,8 @@ describe('ApplicationUser Management Update Component', () => {
   describe('Compare relationships', () => {
     describe('compareUser', () => {
       it('Should forward to userService', () => {
-        const entity = { id: 123 };
-        const entity2 = { id: 456 };
+        const entity = { id: 3944 };
+        const entity2 = { id: 6275 };
         jest.spyOn(userService, 'compareUser');
         comp.compareUser(entity, entity2);
         expect(userService.compareUser).toHaveBeenCalledWith(entity, entity2);
@@ -210,8 +210,8 @@ describe('ApplicationUser Management Update Component', () => {
 
     describe('compareInstitution', () => {
       it('Should forward to institutionService', () => {
-        const entity = { id: 123 };
-        const entity2 = { id: 456 };
+        const entity = { id: 20763 };
+        const entity2 = { id: 1511 };
         jest.spyOn(institutionService, 'compareInstitution');
         comp.compareInstitution(entity, entity2);
         expect(institutionService.compareInstitution).toHaveBeenCalledWith(entity, entity2);

@@ -9,7 +9,7 @@
     "devServerPort": 4200,
     "enableTranslation": false,
     "entities": ["ApplicationUser", "EntitySubscription", "Institution"],
-    "jhipsterVersion": "8.7.3",
+    "jhipsterVersion": "8.8.0",
     "microfrontend": null,
     "microfrontends": [],
     "nativeLanguage": "en",

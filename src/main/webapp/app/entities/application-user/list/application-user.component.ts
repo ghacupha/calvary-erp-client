@@ -16,7 +16,7 @@
 /// along with this program. If not, see <http://www.gnu.org/licenses/>.
 ///
 
-import { Component, NgZone, OnInit, inject } from '@angular/core';
+import { Component, NgZone, OnInit, inject, signal } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Data, ParamMap, Router, RouterModule } from '@angular/router';
 import { Observable, Subscription, combineLatest, filter, tap } from 'rxjs';
@@ -24,7 +24,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import SharedModule from 'app/shared/shared.module';
 import { SortByDirective, SortDirective, SortService, type SortState, sortStateSignal } from 'app/shared/sort';
-import { DurationPipe, FormatMediumDatePipe, FormatMediumDatetimePipe } from 'app/shared/date';
+import { FormatMediumDatetimePipe } from 'app/shared/date';
 import { ItemCountComponent } from 'app/shared/pagination';
 import { FormsModule } from '@angular/forms';
 import { ITEMS_PER_PAGE, PAGE_HEADER, TOTAL_COUNT_RESPONSE_HEADER } from 'app/config/pagination.constants';
@@ -36,7 +36,6 @@ import { ApplicationUserService, EntityArrayResponseType } from '../service/appl
 import { ApplicationUserDeleteDialogComponent } from '../delete/application-user-delete-dialog.component';
 
 @Component({
-  standalone: true,
   selector: 'jhi-application-user',
   templateUrl: './application-user.component.html',
   imports: [
@@ -45,9 +44,7 @@ import { ApplicationUserDeleteDialogComponent } from '../delete/application-user
     SharedModule,
     SortDirective,
     SortByDirective,
-    DurationPipe,
     FormatMediumDatetimePipe,
-    FormatMediumDatePipe,
     FilterComponent,
     ItemCountComponent,
   ],
@@ -65,7 +62,7 @@ export class ApplicationUserComponent implements OnInit {
   ];
 
   subscription: Subscription | null = null;
-  applicationUsers?: IApplicationUser[];
+  applicationUsers = signal<IApplicationUser[]>([]);
   isLoading = false;
 
   sortState = sortStateSignal({});
@@ -97,17 +94,18 @@ export class ApplicationUserComponent implements OnInit {
   }
 
   search(query: string): void {
-    const { predicate } = this.sortState();
-    if (query && predicate && ApplicationUserComponent.NOT_SORTABLE_FIELDS_AFTER_SEARCH.includes(predicate)) {
-      this.loadDefaultSortState();
-    }
     this.page = 1;
     this.currentSearch = query;
+    const { predicate } = this.sortState();
+    if (query && predicate && ApplicationUserComponent.NOT_SORTABLE_FIELDS_AFTER_SEARCH.includes(predicate)) {
+      this.navigateToWithComponentValues(this.getDefaultSortState());
+      return;
+    }
     this.navigateToWithComponentValues(this.sortState());
   }
 
-  loadDefaultSortState(): void {
-    this.sortState.set(this.sortService.parseSortParam(this.activatedRoute.snapshot.data[DEFAULT_SORT_DATA]));
+  getDefaultSortState(): SortState {
+    return this.sortService.parseSortParam(this.activatedRoute.snapshot.data[DEFAULT_SORT_DATA]);
   }
 
   delete(applicationUser: IApplicationUser): void {
@@ -155,7 +153,7 @@ export class ApplicationUserComponent implements OnInit {
   protected onResponseSuccess(response: EntityArrayResponseType): void {
     this.fillComponentAttributesFromResponseHeader(response.headers);
     const dataFromBody = this.fillComponentAttributesFromResponseBody(response.body);
-    this.applicationUsers = dataFromBody;
+    this.applicationUsers.set(dataFromBody);
   }
 
   protected fillComponentAttributesFromResponseBody(data: IApplicationUser[] | null): IApplicationUser[] {

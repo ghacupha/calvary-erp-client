@@ -62,7 +62,7 @@ describe('Institution Management Update Component', () => {
 
   describe('ngOnInit', () => {
     it('Should update editForm', () => {
-      const institution: IInstitution = { id: 456 };
+      const institution: IInstitution = { id: 1511 };
 
       activatedRoute.data = of({ institution });
       comp.ngOnInit();
@@ -75,7 +75,7 @@ describe('Institution Management Update Component', () => {
     it('Should call update service on save for existing entity', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IInstitution>>();
-      const institution = { id: 123 };
+      const institution = { id: 20763 };
       jest.spyOn(institutionFormService, 'getInstitution').mockReturnValue(institution);
       jest.spyOn(institutionService, 'update').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
@@ -98,7 +98,7 @@ describe('Institution Management Update Component', () => {
     it('Should call create service on save for new entity', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IInstitution>>();
-      const institution = { id: 123 };
+      const institution = { id: 20763 };
       jest.spyOn(institutionFormService, 'getInstitution').mockReturnValue({ id: null });
       jest.spyOn(institutionService, 'create').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
@@ -121,7 +121,7 @@ describe('Institution Management Update Component', () => {
     it('Should set isSaving to false on error', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IInstitution>>();
-      const institution = { id: 123 };
+      const institution = { id: 20763 };
       jest.spyOn(institutionService, 'update').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
       activatedRoute.data = of({ institution });
