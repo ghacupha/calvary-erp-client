@@ -1,9 +1,8 @@
-lint-staged
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
 
-# #!/bin/sh
-# . "$(dirname "$0")/_/husky.sh"
+powershell -ExecutionPolicy Bypass -File ./.patches/Apply-Patches.ps1
 
-# # Apply our patch
-# ../.patches/applyPatches.sh
+npx lint-staged
 
-# # Continue with the commit
+
