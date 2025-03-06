@@ -66,11 +66,11 @@ describe('EntitySubscription Management Update Component', () => {
 
   describe('ngOnInit', () => {
     it('Should call Institution query and add missing value', () => {
-      const entitySubscription: IEntitySubscription = { id: 14032 };
-      const institution: IInstitution = { id: 20763 };
+      const entitySubscription: IEntitySubscription = { id: 456 };
+      const institution: IInstitution = { id: 18294 };
       entitySubscription.institution = institution;
 
-      const institutionCollection: IInstitution[] = [{ id: 20763 }];
+      const institutionCollection: IInstitution[] = [{ id: 5567 }];
       jest.spyOn(institutionService, 'query').mockReturnValue(of(new HttpResponse({ body: institutionCollection })));
       const additionalInstitutions = [institution];
       const expectedCollection: IInstitution[] = [...additionalInstitutions, ...institutionCollection];
@@ -88,14 +88,14 @@ describe('EntitySubscription Management Update Component', () => {
     });
 
     it('Should update editForm', () => {
-      const entitySubscription: IEntitySubscription = { id: 14032 };
-      const institution: IInstitution = { id: 20763 };
+      const entitySubscription: IEntitySubscription = { id: 456 };
+      const institution: IInstitution = { id: 19706 };
       entitySubscription.institution = institution;
 
       activatedRoute.data = of({ entitySubscription });
       comp.ngOnInit();
 
-      expect(comp.institutionsSharedCollection).toContainEqual(institution);
+      expect(comp.institutionsSharedCollection).toContain(institution);
       expect(comp.entitySubscription).toEqual(entitySubscription);
     });
   });
@@ -104,7 +104,7 @@ describe('EntitySubscription Management Update Component', () => {
     it('Should call update service on save for existing entity', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IEntitySubscription>>();
-      const entitySubscription = { id: 11350 };
+      const entitySubscription = { id: 123 };
       jest.spyOn(entitySubscriptionFormService, 'getEntitySubscription').mockReturnValue(entitySubscription);
       jest.spyOn(entitySubscriptionService, 'update').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
@@ -127,7 +127,7 @@ describe('EntitySubscription Management Update Component', () => {
     it('Should call create service on save for new entity', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IEntitySubscription>>();
-      const entitySubscription = { id: 11350 };
+      const entitySubscription = { id: 123 };
       jest.spyOn(entitySubscriptionFormService, 'getEntitySubscription').mockReturnValue({ id: null });
       jest.spyOn(entitySubscriptionService, 'create').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
@@ -150,7 +150,7 @@ describe('EntitySubscription Management Update Component', () => {
     it('Should set isSaving to false on error', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IEntitySubscription>>();
-      const entitySubscription = { id: 11350 };
+      const entitySubscription = { id: 123 };
       jest.spyOn(entitySubscriptionService, 'update').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
       activatedRoute.data = of({ entitySubscription });
@@ -171,8 +171,8 @@ describe('EntitySubscription Management Update Component', () => {
   describe('Compare relationships', () => {
     describe('compareInstitution', () => {
       it('Should forward to institutionService', () => {
-        const entity = { id: 20763 };
-        const entity2 = { id: 1511 };
+        const entity = { id: 123 };
+        const entity2 = { id: 456 };
         jest.spyOn(institutionService, 'compareInstitution');
         comp.compareInstitution(entity, entity2);
         expect(institutionService.compareInstitution).toHaveBeenCalledWith(entity, entity2);

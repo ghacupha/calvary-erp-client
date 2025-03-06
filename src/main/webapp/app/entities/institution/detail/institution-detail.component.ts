@@ -20,12 +20,14 @@ import { Component, input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import SharedModule from 'app/shared/shared.module';
+import { DurationPipe, FormatMediumDatePipe, FormatMediumDatetimePipe } from 'app/shared/date';
 import { IInstitution } from '../institution.model';
 
 @Component({
+  standalone: true,
   selector: 'jhi-institution-detail',
   templateUrl: './institution-detail.component.html',
-  imports: [SharedModule, RouterModule],
+  imports: [SharedModule, RouterModule, DurationPipe, FormatMediumDatetimePipe, FormatMediumDatePipe],
 })
 export class InstitutionDetailComponent {
   institution = input<IInstitution | null>(null);

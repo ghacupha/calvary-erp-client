@@ -21,33 +21,33 @@ import dayjs from 'dayjs/esm';
 import { IApplicationUser, NewApplicationUser } from './application-user.model';
 
 export const sampleWithRequiredData: IApplicationUser = {
-  id: 15785,
-  username: 'whoever starch',
+  id: 23926,
+  username: 'ha partially',
 };
 
 export const sampleWithPartialData: IApplicationUser = {
-  id: 23970,
-  username: 'ew',
-  email: 'Noah.Bashirian@gmail.com',
-  langKey: 'wedding',
+  id: 32144,
+  username: 'searchingly extra-large',
+  imageUrl: 'platter wherever slump',
+  resetDate: dayjs('2024-09-30T07:20'),
 };
 
 export const sampleWithFullData: IApplicationUser = {
-  id: 9548,
-  username: 'syringe but',
-  firstName: 'Stephan',
-  lastName: 'Goyette',
-  email: 'Earline_Ferry@yahoo.com',
+  id: 2722,
+  username: 'geez',
+  firstName: 'Georgianna',
+  lastName: 'Schroeder',
+  email: 'Leola.Turcotte@hotmail.com',
   activated: true,
-  langKey: 'afore respectful forswear',
-  imageUrl: 'before painfully fond',
-  activationKey: 'hovel',
-  resetKey: 'blond boohoo',
-  resetDate: dayjs('2024-09-30T06:00'),
+  langKey: 'dimly',
+  imageUrl: 'unless ownership',
+  activationKey: 'tough',
+  resetKey: 'colour sorrowful dimly',
+  resetDate: dayjs('2024-09-29T15:58'),
 };
 
 export const sampleWithNewData: NewApplicationUser = {
-  username: 'deliquesce left dwell',
+  username: 'than boo',
   id: null,
 };
 

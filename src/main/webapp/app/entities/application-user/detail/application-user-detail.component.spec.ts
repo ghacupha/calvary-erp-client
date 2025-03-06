@@ -36,7 +36,7 @@ describe('ApplicationUser Management Detail Component', () => {
             {
               path: '**',
               loadComponent: () => import('./application-user-detail.component').then(m => m.ApplicationUserDetailComponent),
-              resolve: { applicationUser: () => of({ id: 2107 }) },
+              resolve: { applicationUser: () => of({ id: 123 }) },
             },
           ],
           withComponentInputBinding(),
@@ -58,7 +58,7 @@ describe('ApplicationUser Management Detail Component', () => {
       const instance = await harness.navigateByUrl('/', ApplicationUserDetailComponent);
 
       // THEN
-      expect(instance.applicationUser()).toEqual(expect.objectContaining({ id: 2107 }));
+      expect(instance.applicationUser()).toEqual(expect.objectContaining({ id: 123 }));
     });
   });
 

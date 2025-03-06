@@ -34,6 +34,7 @@ import { IApplicationUser } from '../application-user.model';
 import { ApplicationUserFormGroup, ApplicationUserFormService } from './application-user-form.service';
 
 @Component({
+  standalone: true,
   selector: 'jhi-application-user-update',
   templateUrl: './application-user-update.component.html',
   imports: [SharedModule, FormsModule, ReactiveFormsModule],

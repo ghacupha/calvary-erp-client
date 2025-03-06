@@ -79,7 +79,7 @@ describe('Institution Management Component', () => {
       .mockReturnValueOnce(
         of(
           new HttpResponse({
-            body: [{ id: 20763 }],
+            body: [{ id: 123 }],
             headers: new HttpHeaders({
               link: '<http://localhost/api/foo?page=1&size=20>; rel="next"',
             }),
@@ -89,7 +89,7 @@ describe('Institution Management Component', () => {
       .mockReturnValueOnce(
         of(
           new HttpResponse({
-            body: [{ id: 1511 }],
+            body: [{ id: 456 }],
             headers: new HttpHeaders({
               link: '<http://localhost/api/foo?page=0&size=20>; rel="prev",<http://localhost/api/foo?page=2&size=20>; rel="next"',
             }),
@@ -104,12 +104,12 @@ describe('Institution Management Component', () => {
 
     // THEN
     expect(service.query).toHaveBeenCalled();
-    expect(comp.institutions()[0]).toEqual(expect.objectContaining({ id: 20763 }));
+    expect(comp.institutions?.[0]).toEqual(expect.objectContaining({ id: 123 }));
   });
 
   describe('trackId', () => {
     it('Should forward to institutionService', () => {
-      const entity = { id: 20763 };
+      const entity = { id: 123 };
       jest.spyOn(service, 'getInstitutionIdentifier');
       const id = comp.trackId(entity);
       expect(service.getInstitutionIdentifier).toHaveBeenCalledWith(entity);

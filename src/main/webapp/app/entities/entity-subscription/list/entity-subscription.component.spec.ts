@@ -79,7 +79,7 @@ describe('EntitySubscription Management Component', () => {
       .mockReturnValueOnce(
         of(
           new HttpResponse({
-            body: [{ id: 11350 }],
+            body: [{ id: 123 }],
             headers: new HttpHeaders({
               link: '<http://localhost/api/foo?page=1&size=20>; rel="next"',
             }),
@@ -89,7 +89,7 @@ describe('EntitySubscription Management Component', () => {
       .mockReturnValueOnce(
         of(
           new HttpResponse({
-            body: [{ id: 14032 }],
+            body: [{ id: 456 }],
             headers: new HttpHeaders({
               link: '<http://localhost/api/foo?page=0&size=20>; rel="prev",<http://localhost/api/foo?page=2&size=20>; rel="next"',
             }),
@@ -104,12 +104,12 @@ describe('EntitySubscription Management Component', () => {
 
     // THEN
     expect(service.query).toHaveBeenCalled();
-    expect(comp.entitySubscriptions()[0]).toEqual(expect.objectContaining({ id: 11350 }));
+    expect(comp.entitySubscriptions?.[0]).toEqual(expect.objectContaining({ id: 123 }));
   });
 
   describe('trackId', () => {
     it('Should forward to entitySubscriptionService', () => {
-      const entity = { id: 11350 };
+      const entity = { id: 123 };
       jest.spyOn(service, 'getEntitySubscriptionIdentifier');
       const id = comp.trackId(entity);
       expect(service.getEntitySubscriptionIdentifier).toHaveBeenCalledWith(entity);

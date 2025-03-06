@@ -26,6 +26,7 @@ import { IEntitySubscription } from '../entity-subscription.model';
 import { EntitySubscriptionService } from '../service/entity-subscription.service';
 
 @Component({
+  standalone: true,
   templateUrl: './entity-subscription-delete-dialog.component.html',
   imports: [SharedModule, FormsModule],
 })

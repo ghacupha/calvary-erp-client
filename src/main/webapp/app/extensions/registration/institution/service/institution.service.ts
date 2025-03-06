@@ -37,7 +37,7 @@ export class ERPInstitutionService extends InstitutionService {
 
   protected override resourceUrl = this.applicationConfigService.getEndpointFor('api/erp/institutions');
   protected override resourceSearchUrl = this.applicationConfigService.getEndpointFor('api/erp/institutions/_search');
-  protected override resourceRegisteredUrl = this.applicationConfigService.getEndpointFor('api/erp/institutions/registered');
+  protected resourceRegisteredUrl = this.applicationConfigService.getEndpointFor('api/erp/institutions/registered');
 
   queryRegistered(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);

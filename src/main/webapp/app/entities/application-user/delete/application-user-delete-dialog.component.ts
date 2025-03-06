@@ -26,6 +26,7 @@ import { IApplicationUser } from '../application-user.model';
 import { ApplicationUserService } from '../service/application-user.service';
 
 @Component({
+  standalone: true,
   templateUrl: './application-user-delete-dialog.component.html',
   imports: [SharedModule, FormsModule],
 })

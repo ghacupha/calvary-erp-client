@@ -30,6 +30,7 @@ import { InstitutionService } from '../service/institution.service';
 import { InstitutionFormGroup, InstitutionFormService } from './institution-form.service';
 
 @Component({
+  standalone: true,
   selector: 'jhi-institution-update',
   templateUrl: './institution-update.component.html',
   imports: [SharedModule, FormsModule, ReactiveFormsModule],

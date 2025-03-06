@@ -16,7 +16,7 @@
 /// along with this program. If not, see <http://www.gnu.org/licenses/>.
 ///
 
-import { Component, NgZone, OnInit, inject, signal } from '@angular/core';
+import { Component, NgZone, OnInit, inject } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Data, ParamMap, Router, RouterModule } from '@angular/router';
 import { Observable, Subscription, combineLatest, filter, tap } from 'rxjs';
@@ -24,7 +24,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import SharedModule from 'app/shared/shared.module';
 import { SortByDirective, SortDirective, SortService, type SortState, sortStateSignal } from 'app/shared/sort';
-import { FormatMediumDatetimePipe } from 'app/shared/date';
+import { DurationPipe, FormatMediumDatePipe, FormatMediumDatetimePipe } from 'app/shared/date';
 import { ItemCountComponent } from 'app/shared/pagination';
 import { FormsModule } from '@angular/forms';
 import { ITEMS_PER_PAGE, PAGE_HEADER, TOTAL_COUNT_RESPONSE_HEADER } from 'app/config/pagination.constants';
@@ -36,6 +36,7 @@ import { EntityArrayResponseType, EntitySubscriptionService } from '../service/e
 import { EntitySubscriptionDeleteDialogComponent } from '../delete/entity-subscription-delete-dialog.component';
 
 @Component({
+  standalone: true,
   selector: 'jhi-entity-subscription',
   templateUrl: './entity-subscription.component.html',
   imports: [
@@ -44,7 +45,9 @@ import { EntitySubscriptionDeleteDialogComponent } from '../delete/entity-subscr
     SharedModule,
     SortDirective,
     SortByDirective,
+    DurationPipe,
     FormatMediumDatetimePipe,
+    FormatMediumDatePipe,
     FilterComponent,
     ItemCountComponent,
   ],
@@ -53,7 +56,7 @@ export class EntitySubscriptionComponent implements OnInit {
   private static readonly NOT_SORTABLE_FIELDS_AFTER_SEARCH = ['subscriptionToken'];
 
   subscription: Subscription | null = null;
-  entitySubscriptions = signal<IEntitySubscription[]>([]);
+  entitySubscriptions?: IEntitySubscription[];
   isLoading = false;
 
   sortState = sortStateSignal({});
@@ -85,18 +88,17 @@ export class EntitySubscriptionComponent implements OnInit {
   }
 
   search(query: string): void {
-    this.page = 1;
-    this.currentSearch = query;
     const { predicate } = this.sortState();
     if (query && predicate && EntitySubscriptionComponent.NOT_SORTABLE_FIELDS_AFTER_SEARCH.includes(predicate)) {
-      this.navigateToWithComponentValues(this.getDefaultSortState());
-      return;
+      this.loadDefaultSortState();
     }
+    this.page = 1;
+    this.currentSearch = query;
     this.navigateToWithComponentValues(this.sortState());
   }
 
-  getDefaultSortState(): SortState {
-    return this.sortService.parseSortParam(this.activatedRoute.snapshot.data[DEFAULT_SORT_DATA]);
+  loadDefaultSortState(): void {
+    this.sortState.set(this.sortService.parseSortParam(this.activatedRoute.snapshot.data[DEFAULT_SORT_DATA]));
   }
 
   delete(entitySubscription: IEntitySubscription): void {
@@ -144,7 +146,7 @@ export class EntitySubscriptionComponent implements OnInit {
   protected onResponseSuccess(response: EntityArrayResponseType): void {
     this.fillComponentAttributesFromResponseHeader(response.headers);
     const dataFromBody = this.fillComponentAttributesFromResponseBody(response.body);
-    this.entitySubscriptions.set(dataFromBody);
+    this.entitySubscriptions = dataFromBody;
   }
 
   protected fillComponentAttributesFromResponseBody(data: IEntitySubscription[] | null): IEntitySubscription[] {

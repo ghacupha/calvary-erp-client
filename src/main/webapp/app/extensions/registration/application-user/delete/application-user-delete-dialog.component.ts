@@ -16,14 +16,32 @@
 /// along with this program. If not, see <http://www.gnu.org/licenses/>.
 ///
 
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ApplicationUserDeleteDialogComponent } from '../../../../entities/application-user/delete/application-user-delete-dialog.component';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+
 import SharedModule from 'app/shared/shared.module';
+import { ITEM_DELETED_EVENT } from 'app/config/navigation.constants';
+import { IApplicationUser } from '../application-user.model';
+import { ERPApplicationUserService } from '../service/application-user.service';
 
 @Component({
-  standalone: true,
   templateUrl: './application-user-delete-dialog.component.html',
-  imports: [SharedModule, FormsModule, ApplicationUserDeleteDialogComponent],
+  imports: [SharedModule, FormsModule],
 })
-export class ERPApplicationUserDeleteDialogComponent extends ApplicationUserDeleteDialogComponent {}
+export class ERPApplicationUserDeleteDialogComponent {
+  applicationUser?: IApplicationUser;
+
+  protected applicationUserService = inject(ERPApplicationUserService);
+  protected activeModal = inject(NgbActiveModal);
+
+  cancel(): void {
+    this.activeModal.dismiss();
+  }
+
+  confirmDelete(id: number): void {
+    this.applicationUserService.delete(id).subscribe(() => {
+      this.activeModal.close(ITEM_DELETED_EVENT);
+    });
+  }
+}

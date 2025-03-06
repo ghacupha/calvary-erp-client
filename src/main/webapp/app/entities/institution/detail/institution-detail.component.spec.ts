@@ -36,7 +36,7 @@ describe('Institution Management Detail Component', () => {
             {
               path: '**',
               loadComponent: () => import('./institution-detail.component').then(m => m.InstitutionDetailComponent),
-              resolve: { institution: () => of({ id: 20763 }) },
+              resolve: { institution: () => of({ id: 123 }) },
             },
           ],
           withComponentInputBinding(),
@@ -58,7 +58,7 @@ describe('Institution Management Detail Component', () => {
       const instance = await harness.navigateByUrl('/', InstitutionDetailComponent);
 
       // THEN
-      expect(instance.institution()).toEqual(expect.objectContaining({ id: 20763 }));
+      expect(instance.institution()).toEqual(expect.objectContaining({ id: 123 }));
     });
   });
 

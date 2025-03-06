@@ -16,7 +16,7 @@
 /// along with this program. If not, see <http://www.gnu.org/licenses/>.
 ///
 
-import { Component, NgZone, OnInit, inject, signal } from '@angular/core';
+import { Component, NgZone, OnInit, inject } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Data, ParamMap, Router, RouterModule } from '@angular/router';
 import { Observable, Subscription, combineLatest, filter, tap } from 'rxjs';
@@ -24,6 +24,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import SharedModule from 'app/shared/shared.module';
 import { SortByDirective, SortDirective, SortService, type SortState, sortStateSignal } from 'app/shared/sort';
+import { DurationPipe, FormatMediumDatePipe, FormatMediumDatetimePipe } from 'app/shared/date';
 import { ItemCountComponent } from 'app/shared/pagination';
 import { FormsModule } from '@angular/forms';
 import { ITEMS_PER_PAGE, PAGE_HEADER, TOTAL_COUNT_RESPONSE_HEADER } from 'app/config/pagination.constants';
@@ -35,15 +36,27 @@ import { EntityArrayResponseType, InstitutionService } from '../service/institut
 import { InstitutionDeleteDialogComponent } from '../delete/institution-delete-dialog.component';
 
 @Component({
+  standalone: true,
   selector: 'jhi-institution',
   templateUrl: './institution.component.html',
-  imports: [RouterModule, FormsModule, SharedModule, SortDirective, SortByDirective, FilterComponent, ItemCountComponent],
+  imports: [
+    RouterModule,
+    FormsModule,
+    SharedModule,
+    SortDirective,
+    SortByDirective,
+    DurationPipe,
+    FormatMediumDatetimePipe,
+    FormatMediumDatePipe,
+    FilterComponent,
+    ItemCountComponent,
+  ],
 })
 export class InstitutionComponent implements OnInit {
   private static readonly NOT_SORTABLE_FIELDS_AFTER_SEARCH = ['name'];
 
   subscription: Subscription | null = null;
-  institutions = signal<IInstitution[]>([]);
+  institutions?: IInstitution[];
   isLoading = false;
 
   sortState = sortStateSignal({});
@@ -75,18 +88,17 @@ export class InstitutionComponent implements OnInit {
   }
 
   search(query: string): void {
-    this.page = 1;
-    this.currentSearch = query;
     const { predicate } = this.sortState();
     if (query && predicate && InstitutionComponent.NOT_SORTABLE_FIELDS_AFTER_SEARCH.includes(predicate)) {
-      this.navigateToWithComponentValues(this.getDefaultSortState());
-      return;
+      this.loadDefaultSortState();
     }
+    this.page = 1;
+    this.currentSearch = query;
     this.navigateToWithComponentValues(this.sortState());
   }
 
-  getDefaultSortState(): SortState {
-    return this.sortService.parseSortParam(this.activatedRoute.snapshot.data[DEFAULT_SORT_DATA]);
+  loadDefaultSortState(): void {
+    this.sortState.set(this.sortService.parseSortParam(this.activatedRoute.snapshot.data[DEFAULT_SORT_DATA]));
   }
 
   delete(institution: IInstitution): void {
@@ -134,7 +146,7 @@ export class InstitutionComponent implements OnInit {
   protected onResponseSuccess(response: EntityArrayResponseType): void {
     this.fillComponentAttributesFromResponseHeader(response.headers);
     const dataFromBody = this.fillComponentAttributesFromResponseBody(response.body);
-    this.institutions.set(dataFromBody);
+    this.institutions = dataFromBody;
   }
 
   protected fillComponentAttributesFromResponseBody(data: IInstitution[] | null): IInstitution[] {

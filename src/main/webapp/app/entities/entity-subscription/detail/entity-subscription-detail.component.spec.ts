@@ -36,7 +36,7 @@ describe('EntitySubscription Management Detail Component', () => {
             {
               path: '**',
               loadComponent: () => import('./entity-subscription-detail.component').then(m => m.EntitySubscriptionDetailComponent),
-              resolve: { entitySubscription: () => of({ id: 11350 }) },
+              resolve: { entitySubscription: () => of({ id: 123 }) },
             },
           ],
           withComponentInputBinding(),
@@ -58,7 +58,7 @@ describe('EntitySubscription Management Detail Component', () => {
       const instance = await harness.navigateByUrl('/', EntitySubscriptionDetailComponent);
 
       // THEN
-      expect(instance.entitySubscription()).toEqual(expect.objectContaining({ id: 11350 }));
+      expect(instance.entitySubscription()).toEqual(expect.objectContaining({ id: 123 }));
     });
   });
 
