@@ -1,1 +1,9 @@
 lint-staged
+
+# #!/bin/sh
+# . "$(dirname "$0")/_/husky.sh"
+
+# # Apply our patch
+# ../.patches/applyPatches.sh
+
+# # Continue with the commit
