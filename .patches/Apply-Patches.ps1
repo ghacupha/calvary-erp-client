@@ -9,8 +9,8 @@ if (!(Get-Command "patch" -ErrorAction SilentlyContinue)) {
     exit 1
 }
 
-Get-Content "$patchDir/application-user-update-template.patch" | patch -p1
-Get-Content "$patchDir/application-user-update-component.patch" | patch -p1
-Get-Content "$patchDir/register-component.patch" | patch -p1
+Get-Content "$patchDir/application-user-update-template.patch" | patch -p1 --reject
+Get-Content "$patchDir/application-user-update-component.patch" | patch -p1  --reject
+Get-Content "$patchDir/register-component.patch" | patch -p1 --reject
 
 Write-Host "Patches applied successfully." -ForegroundColor Green
