@@ -9,10 +9,8 @@ if (!(Get-Command "patch" -ErrorAction SilentlyContinue)) {
     exit 1
 }
 
-# Apply the first patch
 Get-Content "$patchDir/application-user-update-template.patch" | patch -p1
-
-# Apply the second patch
 Get-Content "$patchDir/application-user-update-component.patch" | patch -p1
+Get-Content "$patchDir/register-component.patch" | patch -p1
 
 Write-Host "Patches applied successfully." -ForegroundColor Green
