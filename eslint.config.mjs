@@ -64,7 +64,7 @@ export default tseslint.config(
       '@typescript-eslint/explicit-function-return-type': ['error', { allowExpressions: true }],
       '@typescript-eslint/explicit-module-boundary-types': 'off',
       '@typescript-eslint/member-ordering': [
-        'error',
+        'warn',
         {
           default: [
             'public-static-field',
@@ -134,4 +134,9 @@ export default tseslint.config(
   },
   // jhipster-needle-eslint-add-config - JHipster will add additional config here
   prettier,
+  {
+    rules: {
+      'prettier/prettier': ['off', { endOfLine: 'auto' }],
+    },
+  },
 );

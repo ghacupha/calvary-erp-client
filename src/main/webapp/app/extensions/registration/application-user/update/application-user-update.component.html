@@ -18,16 +18,31 @@
 
 -->
 <div>
-  <!-- Provide a custom template for the activated field -->
+  <!-- A custom template for the activated field -->
   <ng-template #customActivated let-editForm="editForm">
     <div class="form-group" [formGroup]="editForm">
-      <label for="activated">Activated</label>
-      <!-- Replace the default radio with your custom slide toggle control -->
+      <label>Activated</label>
       <jhi-slide-toggle formControlName="activated"></jhi-slide-toggle>
     </div>
   </ng-template>
 
-  <div>
-    <jhi-application-user-update [customActivatedTemplate]="customActivated"></jhi-application-user-update>
+  <ng-template #customInstitution let-editForm="editForm">
+    <jhi-m21-institution-form-control
+      (valueSelected)="updateInstitution($event)"
+      [inputValue]="editForm.get(['institution'])!.value"
+      formControlName="institution"
+      inputControlLabel="institution"
+      ngDefaultControl
+    >
+      <option [ngValue]="editForm.get(['institution'])!.value"></option>
+    </jhi-m21-institution-form-control>
+  </ng-template>
+
+  <div [formGroup]="editForm">
+    <jhi-application-user-update
+      [selectedInstitution]="selectedInstitution"
+      [customInstitutionTemplate]="customInstitution"
+      [customActivatedTemplate]="customActivated"
+    ></jhi-application-user-update>
   </div>
 </div>

@@ -27,6 +27,7 @@ import { ERPApplicationUserService } from '../service/application-user.service';
 
 @Component({
   standalone: true,
+  selector: 'jhi-application-user-delete-dialog',
   templateUrl: './application-user-delete-dialog.component.html',
   imports: [SharedModule, FormsModule],
 })

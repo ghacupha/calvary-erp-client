@@ -11,6 +11,8 @@ if (!(Get-Command "patch" -ErrorAction SilentlyContinue)) {
 
 Get-Content "$patchDir/application-user-update-template.patch" | patch -p1 --reject
 Get-Content "$patchDir/application-user-update-component.patch" | patch -p1  --reject
+Get-Content "$patchDir/application-user-update-institution-field-202503201753.patch" | patch -p1  --reject
+Get-Content "$patchDir/application-user-update-institution-field-202503201754.patch" | patch -p1  --reject
 Get-Content "$patchDir/register-component.patch" | patch -p1 --reject
 
 Write-Host "Patches applied successfully." -ForegroundColor Green

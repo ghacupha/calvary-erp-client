@@ -32,6 +32,40 @@
           </div>
         }
 
+        <!-- Institution block -->
+        <ng-container *ngIf="!customInstitutionTemplate; else customInstitutionContainerTemplate">
+          <div class="mb-3">
+            <label class="form-label" for="field_institution">Institution</label>
+            <select
+              class="form-control"
+              id="field_institution"
+              data-cy="institution"
+              name="institution"
+              formControlName="institution"
+              [compareWith]="compareInstitution"
+            >
+              @if (!editForm.get('institution')!.value) {
+                <option [ngValue]="null" selected></option>
+              }
+              @for (institutionOption of institutionsSharedCollection; track $index) {
+                <option [ngValue]="institutionOption">{{ institutionOption.name }}</option>
+              }
+            </select>
+          </div>
+          @if (editForm.get(['institution'])!.invalid && (editForm.get(['institution'])!.dirty || editForm.get(['institution'])!.touched)) {
+            <div>
+              @if (editForm.get(['institution'])?.errors?.required) {
+                <small class="form-text text-danger">This field is required.</small>
+              }
+            </div>
+          }
+        </ng-container>
+        <ng-template #customInstitutionContainerTemplate>
+          <ng-container
+            *ngTemplateOutlet="customInstitutionTemplate ? customInstitutionTemplate : null; context: { editForm: editForm }"
+          ></ng-container>
+        </ng-template>
+
         @let usernameRef = editForm.get('username')!;
         <div class="mb-3">
           <label class="form-label" for="field_username">Username</label>
@@ -144,32 +178,6 @@
         @if (editForm.get(['systemUser'])!.invalid && (editForm.get(['systemUser'])!.dirty || editForm.get(['systemUser'])!.touched)) {
           <div>
             @if (editForm.get(['systemUser'])?.errors?.required) {
-              <small class="form-text text-danger">This field is required.</small>
-            }
-          </div>
-        }
-
-        <div class="mb-3">
-          <label class="form-label" for="field_institution">Institution</label>
-          <select
-            class="form-control"
-            id="field_institution"
-            data-cy="institution"
-            name="institution"
-            formControlName="institution"
-            [compareWith]="compareInstitution"
-          >
-            @if (!editForm.get('institution')!.value) {
-              <option [ngValue]="null" selected></option>
-            }
-            @for (institutionOption of institutionsSharedCollection; track $index) {
-              <option [ngValue]="institutionOption">{{ institutionOption.name }}</option>
-            }
-          </select>
-        </div>
-        @if (editForm.get(['institution'])!.invalid && (editForm.get(['institution'])!.dirty || editForm.get(['institution'])!.touched)) {
-          <div>
-            @if (editForm.get(['institution'])?.errors?.required) {
               <small class="form-text text-danger">This field is required.</small>
             }
           </div>

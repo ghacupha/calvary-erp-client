@@ -16,7 +16,7 @@
 /// along with this program. If not, see <http://www.gnu.org/licenses/>.
 ///
 
-import { Component, Input, OnInit, TemplateRef, inject } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, inject, OnChanges } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -39,8 +39,10 @@ import { ApplicationUserFormGroup, ApplicationUserFormService } from './applicat
   templateUrl: './application-user-update.component.html',
   imports: [SharedModule, FormsModule, ReactiveFormsModule],
 })
-export class ApplicationUserUpdateComponent implements OnInit {
+export class ApplicationUserUpdateComponent implements OnInit, OnChanges {
   @Input() customActivatedTemplate?: TemplateRef<any> | null = null;
+  @Input() customInstitutionTemplate?: TemplateRef<any> | null = null;
+  @Input() selectedInstitution!: IInstitution;
 
   isSaving = false;
   applicationUser: IApplicationUser | null = null;
@@ -61,13 +63,16 @@ export class ApplicationUserUpdateComponent implements OnInit {
 
   compareInstitution = (o1: IInstitution | null, o2: IInstitution | null): boolean => this.institutionService.compareInstitution(o1, o2);
 
+  ngOnChanges(): void {
+    this.editForm.patchValue({ institution: this.selectedInstitution });
+  }
+
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ applicationUser }) => {
       this.applicationUser = applicationUser;
       if (applicationUser) {
         this.updateForm(applicationUser);
       }
-
       this.loadRelationshipsOptions();
     });
   }

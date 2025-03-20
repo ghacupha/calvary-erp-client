@@ -24,6 +24,7 @@ import { ApplicationConfigService } from 'app/core/config/application-config.ser
 import { createRequestOption } from 'app/core/request/request-util';
 import { IInstitution } from '../institution.model';
 import { InstitutionService } from '../../../../entities/institution/service/institution.service';
+import { ASC, DESC } from '../../../../config/navigation.constants';
 
 export type PartialUpdateInstitution = Partial<IInstitution> & Pick<IInstitution, 'id'>;
 
@@ -42,5 +43,24 @@ export class ERPInstitutionService extends InstitutionService {
   queryRegistered(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http.get<IInstitution[]>(this.resourceRegisteredUrl, { params: options, observe: 'response' });
+  }
+
+  searchInputs(searchText: string): Observable<IInstitution[]> {
+    const options = { query: searchText, page: 0, size: 100, sort: this.sort() };
+
+    return this.http.get<IInstitution[]>(this.resourceSearchUrl, { params: options });
+  }
+
+  sort(): string[] {
+    const predicate = 'id';
+    const ascending = false;
+
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+    const result = [predicate + ',' + (ascending ? ASC : DESC)];
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+    if (predicate !== 'id') {
+      result.push('id');
+    }
+    return result;
   }
 }
